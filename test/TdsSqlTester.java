@@ -22,7 +22,7 @@ public class TdsSqlTester {
 			
 			String DRIVER = "com.ibm.as400.access.AS400JDBCDriver"; 
 			String URL = "jdbc:as400://" + IP_SYSTEMA_AS400 + ";naming=system;libraries=syendre,syendptf,syspedf,sysped,l1dat"; //CB inloggnings ex
-			//String URL = "jdbc:as400://" + IP_SYSTEMA_AS400 + ";naming=system;";
+			//String URL = "jdbc:as400://" + IP_SYSTEMA_AS400 + ";database name=S0653DCP;naming=system;"; //database name only with V5R2 or higher in OS/400
 			Connection conn = null;
 			 
 			 //Connect to iSeries 

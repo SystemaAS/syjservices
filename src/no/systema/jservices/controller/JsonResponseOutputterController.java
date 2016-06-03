@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.util.*;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
@@ -25,11 +26,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //Application
+import no.systema.jservices.jsonwriter.JsonResponseWriter;
+import no.systema.jservices.jsonwriter.reflection.JsonWriterReflectionManager;
 import no.systema.jservices.model.dao.entities.CusdfDao;
+import no.systema.jservices.model.dao.entities.DbConnectionTesterDao;
+import no.systema.jservices.model.dao.entities.IDao;
 import no.systema.jservices.model.dao.services.CundfDaoServices;
+import no.systema.jservices.model.dao.services.DbConnectionTesterDaoServices;
 
 
 import no.systema.main.util.JsonSpecialCharactersManager;
+import no.systema.main.util.constants.JsonConstants;
 
 /**
  * Json Response Controller
@@ -101,6 +108,44 @@ public class JsonResponseOutputterController {
 		return sb.toString();
 	}
 	
+	/**
+	 * http://localhost:8080/syjservices/syjsdbconn.do?user=OSCAR
+	 * @return
+	 */
+	@RequestMapping(value="syjsdbconn.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String syjsJS001db() {
+		JsonResponseWriter jsonWriter = new JsonResponseWriter();
+		StringBuffer sb = new StringBuffer();
+		try{
+			logger.info("Inside syjsdbconn");
+			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
+			
+			//get list
+			logger.info("Before dao getList");
+			List<IDao> list = this.dbConnectionTesterDaoServices.getList();
+			logger.info("After dao getList");
+			String userName = "DBTESTER";
+			
+			//process result
+			if (list!=null){
+				//write the final JSON output
+				sb.append(jsonWriter.setJsonResult_Common_GetList(userName, list));
+			}else{
+				//write JSON error output
+				StringBuffer dbErrorStackTrace = new StringBuffer();
+				String errMsg = "ERROR on SELECT: list is NULL?  Try to check: <DaoServices>.getList";
+				String status = "error";
+				logger.info("After SELECT:" + " " + status + errMsg );
+				sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+			}
+			
+		}catch(Exception e){
+			return "ERROR [JsonResponseOutputterController]";
+		}
+	    
+		return sb.toString();
+	}
 	
 	
 	/**
@@ -122,6 +167,13 @@ public class JsonResponseOutputterController {
 	@Required
 	public void setCundfDaoServices (CundfDaoServices value){ this.cundfDaoServices = value; }
 	public CundfDaoServices getCundfDaoServices(){ return this.cundfDaoServices; }
+	
+	@Qualifier ("dbConnectionTesterDaoServices")
+	private DbConnectionTesterDaoServices dbConnectionTesterDaoServices;
+	@Autowired
+	@Required
+	public void setDbConnectionTesterDaoServices (DbConnectionTesterDaoServices value){ this.dbConnectionTesterDaoServices = value; }
+	public DbConnectionTesterDaoServices getDbConnectionTesterDaoServices(){ return this.dbConnectionTesterDaoServices; }
 	
 	
 	

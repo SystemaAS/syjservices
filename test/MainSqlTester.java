@@ -34,6 +34,7 @@ public class MainSqlTester {
 				 //SQL-statements
 				
 				 //SQL 1 (Christer)
+				 /*
 				 String sql = "select knavn, adr1, adr2, postnr, adr3 from syspedf/cundf  where knavn like ?";
 				 PreparedStatement stmt = conn.prepareStatement(sql);
 				 stmt.setString(1, "%");
@@ -46,26 +47,30 @@ public class MainSqlTester {
 					 //String field2 = rs.getString("fieldname");
 					 System.out.println(field1 + ":" + field2 + ":" + field3 + ":" + field4);
 				 }
-				 
+				 */
 				 //SQL 2 (Svein)
 				 /*String sql = "select faavd, fabeln, faopd, fali from sampledb/fakt where fabeln <= ? ";
 				 PreparedStatement stmt = conn.prepareStatement(sql);
 				 stmt.setString(1, "200");
 				 */
 				 //OSCARS yyy table
-				 /*String sql = "select count(*) from sampledb/xxx ";
+				 String sql = "select * from syspedf/kodtsi ";
 				 PreparedStatement stmt = conn.prepareStatement(sql);
 				 
 				 ResultSet rs = stmt.executeQuery();
 				 while (rs.next()) {
-					 String field1 = rs.getString(1);
-					 String field2 = rs.getString(2);
-					 String field3 = rs.getString(3);
-					 String field4 = rs.getString(4);
+					 String field1 = rs.getString(2);
+					 String field2 = rs.getString(3);
+					 String field3 = rs.getString(4);
+					 String field4 = rs.getString(5);
+					 String field5 = rs.getString(6);
+					 String field6 = rs.getString(7);
+					 
 					 //String field2 = rs.getString("fieldname");
-					 System.out.println(field1 + ":" + field2 + ":" + field3 + ":" + field4);
+					 System.out.println(field1 + ":" + field2 + ":" + field3 + ":" + field4 + ":" + field5 + ":" + field6);
+					 //System.out.println(field1);
 				 }
-				 */
+				 
 				 
 				 
 				 
