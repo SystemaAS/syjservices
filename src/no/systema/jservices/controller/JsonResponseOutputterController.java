@@ -73,7 +73,7 @@ public class JsonResponseOutputterController {
 	 */
 	@RequestMapping(value="syjsJS001.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String syjsJS001() {
+	public String syjsJS001( HttpSession session, HttpServletRequest request) {
 		StringBuffer sb = new StringBuffer();
 		try{
 			logger.info("Inside syjsJS001");
@@ -105,7 +105,7 @@ public class JsonResponseOutputterController {
 		}catch(Exception e){
 			return "ERROR [JsonResponseOutputterController]";
 		}
-	    
+	    session.invalidate();
 		return sb.toString();
 	}
 	
@@ -116,7 +116,7 @@ public class JsonResponseOutputterController {
 	 */
 	@RequestMapping(value="syjsdbconn.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String syjsJS001db() {
+	public String syjsJS001db( HttpSession session, HttpServletRequest request) {
 		JsonResponseWriter jsonWriter = new JsonResponseWriter();
 		StringBuffer sb = new StringBuffer();
 		try{
@@ -145,7 +145,7 @@ public class JsonResponseOutputterController {
 		}catch(Exception e){
 			return "ERROR [JsonResponseOutputterController]";
 		}
-	    
+		session.invalidate();
 		return sb.toString();
 	}
 	

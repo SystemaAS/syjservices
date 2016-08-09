@@ -61,7 +61,7 @@ public class JsonTdsResponseOutputterController {
 	 * FreeForm Source:
 	 * 	 File: 		QRPGSRC
 	 * 	 Library:	SYTTAX
-	 * 	 Member: 	SVT010R: TDS  Finnes X-tra mŠngdenhet ?
+	 * 	 Member: 	SVT010R: TDS  Finnes X-tra mï¿½ngdenhet ?
 	 *  
 	 *   Replaces:  TSVG016R.pgm (RPG-module)
 	 * 
@@ -118,6 +118,7 @@ public class JsonTdsResponseOutputterController {
 			e.printStackTrace(printWriter);
 			return "ERROR [JsonResponseOutputterController]" + writer.toString();
 		}
+		session.invalidate();
 		return sb.toString();
 	}
 	
