@@ -54,4 +54,7 @@
             <ref bean="dataSource"/>
         </property>
   </bean>
+  
+  <import resource="classpath:syjservicescommon-data-service.xml" />
+  
  </beans>
