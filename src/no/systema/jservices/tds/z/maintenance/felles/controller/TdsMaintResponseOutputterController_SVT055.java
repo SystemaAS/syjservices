@@ -130,24 +130,24 @@ public class TdsMaintResponseOutputterController_SVT055 {
 	 * File: 	SVTFI
 	 * PGM:		SVT055
 	 * Member: 	TDS Maintenance - UPDATE SPECIFIC
-	 * Note: This method does not contain UPDATE. Only CREATE/DELETE. Ref. AS400 UC (go dki: certifikatkoder)
+	 * Note: This method does not contain UPDATE. Only CREATE/DELETE. Ref. AS400 UC 
 	 * 
-	 * @Example UPDATE: http://gw.systema.no:8080/syjservicesst/syjsSVT055R_U.do?user=OSCAR&mode=U/A/D&dkt...
+	 * @Example UPDATE: http://gw.systema.no:8080/syjservices/syjsSVT055R_U.do?user=OSCAR&mode=U/A/D&svt...
 	 *
 	 * @param session
 	 * @param request
 	 * @return
 	 * 
 	 */
-	/*
-	@RequestMapping(value="syjsDKT055R_U.do", method={RequestMethod.GET, RequestMethod.POST})
+	
+	@RequestMapping(value="syjsSVT055R_U.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String syjsR_U( HttpSession session, HttpServletRequest request) {
 		JsonResponseWriter jsonWriter = new JsonResponseWriter();
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsDKT055R_U");
+			logger.info("Inside syjsSVT055R_U");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			String mode = request.getParameter("mode");
@@ -159,24 +159,22 @@ public class TdsMaintResponseOutputterController_SVT055 {
 			StringBuffer dbErrorStackTrace = new StringBuffer();
 			
 			//bind attributes is any
-			DktfiDao dao = new DktfiDao();
-			DktfiDao resultDao = new DktfiDao();
+			SvtfiDao dao = new SvtfiDao();
+			SvtfiDao resultDao = new SvtfiDao();
 			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
             binder.bind(request);
             //rules
-            DKT055R_U rulerLord = new DKT055R_U();
+            SVT055R_U rulerLord = new SVT055R_U();
 			//Key population in order to check if the record exists (for CREATE) and DELETE.
             Map params = new HashMap();
-            params.put("dktard01", dao.getDktard01());
-			params.put("dktard02", dao.getDktard02());
-			params.put("dktard03", dao.getDktard03());
+            //params.put("todo", dao.getTodo());
 			
 			//Start processing now
             if(userName!=null && !"".equals(userName)){
 				if("D".equals(mode)){
 					if(rulerLord.isValidInputForDelete(dao, userName, mode)){
 						logger.info("Before DELETE ...");
-						this.dktardDaoService.deleteAll(params);
+						this.svtfiDaoService.deleteAll(params);
 					}else{
 						//write JSON error output
 						errMsg = "ERROR on DELETE: invalid?  Try to check: <DaoServices>.delete";
@@ -185,21 +183,21 @@ public class TdsMaintResponseOutputterController_SVT055 {
 					}
 				}else{
 				  if(rulerLord.isValidInput(dao, userName, mode)){
-						List<DktfiDao> list = new ArrayList<DktfiDao>();
+						List<SvtfiDao> list = new ArrayList<SvtfiDao>();
 						//do ADD
 						if("A".equals(mode)){
-							list = this.dktfiDaoService.findAll(params);
+							list = this.svtfiDaoService.findAll(params);
 							if(list!=null && list.size()>0){
 								errMsg = "ERROR on CREATE/UPDATE: Record exists already";
 								status = "error";
 								sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
 							}else{
 								logger.info("CREATE new ...");
-								resultDao = this.dktfiDaoService.create(dao);
+								resultDao = this.svtfiDaoService.create(dao);
 							}
 						}else if("U".equals(mode)){
 								logger.info("UPDATE ...");
-								resultDao = this.dktfiDaoService.update(dao);
+								resultDao = this.svtfiDaoService.update(dao);
 						}
 						if(resultDao == null){
 							errMsg = "ERROR on CREATE/UPDATE";
@@ -238,7 +236,7 @@ public class TdsMaintResponseOutputterController_SVT055 {
 		logger.info(sb.toString());
 		return sb.toString();
 	}
-	*/
+	
 	
 	//----------------
 	//WIRED SERVICES
