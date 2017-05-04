@@ -1,5 +1,7 @@
 package no.systema.jservices.tds.z.maintenance.felles.controller.rules;
 
+import org.springframework.validation.ValidationUtils;
+
 import no.systema.jservices.common.dao.SvtfiDao;
 /**
  * 
@@ -20,28 +22,22 @@ public class SVT055R_U {
 		
 		if( (user!=null && !"".equals(user)) && (mode!=null && !"".equals(mode)) ){
 			//check dao
-			//TODO !!
-			/*
-			if( (dao.getDktf_0004t()!=null && !"".equals(dao.getDktf_0004t())) &&
-				(dao.getDktf_0010t()!=null && !"".equals(dao.getDktf_0010t())) && 
-				(dao.getDktf_0022t()!=null && !"".equals(dao.getDktf_0022t())) && 
-				(dao.getDktf_ftipt()!=null && !"".equals(dao.getDktf_ftipt())) &&
-				(dao.getDktf_ftust()!=null && !"".equals(dao.getDktf_ftust())) &&
-				(dao.getDktf_ftipt()!=null && !"".equals(dao.getDktf_ftipt())) &&
-				(dao.getDktf_ftpwt()!=null && !"".equals(dao.getDktf_ftpwt())) &&
+			if( (dao.getSvtf_0004()!=null && !"".equals(dao.getSvtf_0004())) &&
+				(dao.getSvtf_0010()!=null && !"".equals(dao.getSvtf_0010())) && 
+				(dao.getSvtf_0022()!=null && !"".equals(dao.getSvtf_0022())) && 
+				(dao.getSvtf_pref()!=null && !"".equals(dao.getSvtf_pref())) &&
+				(dao.getSvtf_numb()!=null && !"".equals(dao.getSvtf_numb())) &&
+				(dao.getSvtf_usri()!=null && !"".equals(dao.getSvtf_usri())) &&
+				(dao.getSvtf_usra()!=null && !"".equals(dao.getSvtf_usra())) &&
 				//PROD
-				(dao.getDktf_0004p()!=null && !"".equals(dao.getDktf_0004p())) &&
-				(dao.getDktf_0010p()!=null && !"".equals(dao.getDktf_0010p())) && 
-				(dao.getDktf_0022p()!=null && !"".equals(dao.getDktf_0022p())) && 
-				(dao.getDktf_ftipp()!=null && !"".equals(dao.getDktf_ftipp())) &&
-				(dao.getDktf_ftusp()!=null && !"".equals(dao.getDktf_ftusp())) &&
-				(dao.getDktf_ftipp()!=null && !"".equals(dao.getDktf_ftipp())) &&
-				(dao.getDktf_ftpwp()!=null && !"".equals(dao.getDktf_ftpwp()))  ){
+				(dao.getSvtf_sec1()!=null && !"".equals(dao.getSvtf_sec1())) &&
+				(dao.getSvtf_sec2()!=null && !"".equals(dao.getSvtf_sec2())) && 
+				(dao.getSvtf_cer1()!=null && !"".equals(dao.getSvtf_cer1())) &&
+				(dao.getSvtf_cer2()!=null && !"".equals(dao.getSvtf_cer2())) ){
 			
 			}else{
 				retval = false;
 			}
-			*/	
 		}else{
 			retval = false;
 		}
@@ -55,7 +51,7 @@ public class SVT055R_U {
 	 * @return
 	 */
 	public boolean isValidInputForDelete(SvtfiDao dao, String user, String mode){
-		boolean retval = true;
+		boolean retval = false;
 		// N/A
 		return retval;
 	}
