@@ -93,7 +93,10 @@ public class TdsMaintResponseOutputterController_SVT056 {
 	            
 				//do SELECT
 				logger.info("Before SELECT ...");
-				list = this.svthaDaoService.findAll(null);
+				//get list (with or without key...)
+				Map params = null;
+				if(dao.getSvth_sysg()!=null && !"".equals(dao.getSvth_sysg())){ params = dao.getKeys(); }
+				list = this.svthaDaoService.findAll(params);
 				
 				if (list != null){
 					sb.append(jsonWriter.setJsonResult_Common_GetList(userName, list));
@@ -167,7 +170,7 @@ public class TdsMaintResponseOutputterController_SVT056 {
             SVT056R_U rulerLord = new SVT056R_U();
 			//Key population in order to check if the record exists (for CREATE) and DELETE.
             Map params = new HashMap();
-            //params.put("todo", dao.getTodo());
+            params = dao.getKeys();
 			
 			//Start processing now
             if(userName!=null && !"".equals(userName)){
@@ -184,6 +187,7 @@ public class TdsMaintResponseOutputterController_SVT056 {
 				}else{
 				  if(rulerLord.isValidInput(dao, userName, mode)){
 						List<SvthaDao> list = new ArrayList<SvthaDao>();
+						rulerLord.updateNumericFieldsIfNull(dao);
 						//do ADD
 						if("A".equals(mode)){
 							list = this.svthaDaoService.findAll(params);
