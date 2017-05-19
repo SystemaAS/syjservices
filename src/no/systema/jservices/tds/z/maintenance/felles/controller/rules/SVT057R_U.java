@@ -25,7 +25,6 @@ public class SVT057R_U {
 			//check dao
 			if( (dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())) &&
 				(dao.getSvvk_dts()!=null && !"".equals(dao.getSvvk_dts())) && 
-				(dao.getSvvk_dte()!=null && !"".equals(dao.getSvvk_dte())) &&
 				(dao.getSvvk_omr()!=null && !"".equals(dao.getSvvk_omr())) && 
 				(dao.getSvvk_krs()!=null && !"".equals(dao.getSvvk_krs())) ){
 			}else{
@@ -48,7 +47,6 @@ public class SVT057R_U {
 		if( (user!=null && !"".equals(user)) && (mode!=null && !"".equals(mode)) ){
 			if( (dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())) &&
 				(dao.getSvvk_dts()!=null && !"".equals(dao.getSvvk_dts())) && 
-				(dao.getSvvk_dte()!=null && !"".equals(dao.getSvvk_dte())) &&
 				(dao.getSvvk_omr()!=null && !"".equals(dao.getSvvk_omr())) ){
 			}else{
 				retval = false;
