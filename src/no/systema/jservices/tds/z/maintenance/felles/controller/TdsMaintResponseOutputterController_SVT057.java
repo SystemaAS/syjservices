@@ -93,10 +93,19 @@ public class TdsMaintResponseOutputterController_SVT057 {
 	            
 				//do SELECT
 				logger.info("Before SELECT ...");
-				//get list (with or without key...)
+				
 				Map params = null;
-				if(dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())){ params = dao.getKeys(); }
+				
+				if(dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())){ 
+	            	if(!"0".equals(dao.getSvvk_dts())){ params = dao.getKeys(); }
+	            }
+				//needed for fetch of specific record (ajax)
+	            if(dao.getSvvk_dts()!=null && !"".equals(dao.getSvvk_dts())){ 
+	            	if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
+	            }
+				//get list
 				list = this.svtvkDaoService.findAll(params);
+				
 				
 				if (list != null){
 					sb.append(jsonWriter.setJsonResult_Common_GetList(userName, list));
@@ -171,7 +180,7 @@ public class TdsMaintResponseOutputterController_SVT057 {
 			//Key population in order to check if the record exists (for CREATE) and DELETE.
             Map params = new HashMap();
             params = dao.getKeys();
-			
+            
 			//Start processing now
             if(userName!=null && !"".equals(userName)){
 				if("D".equals(mode)){
