@@ -33,6 +33,7 @@ import no.systema.jservices.model.dao.services.BridfDaoServices;
 import no.systema.jservices.common.dao.services.SvtvkDaoService;
 import no.systema.jservices.common.dao.SvtvkDao;
 import no.systema.jservices.common.json.JsonResponseWriter2;
+import no.systema.jservices.common.util.StringUtils;
 import no.systema.jservices.jsonwriter.JsonResponseWriter;
 import no.systema.jservices.tds.z.maintenance.felles.controller.rules.SVT057R_U;
 //rules
@@ -52,7 +53,7 @@ import no.systema.jservices.tds.z.maintenance.felles.controller.rules.SVT057R_U;
 @Controller
 public class TdsMaintResponseOutputterController_SVT057 {
 	private static Logger logger = Logger.getLogger(TdsMaintResponseOutputterController_SVT057.class.getName());
-	
+	private final StringUtils strUtils = new StringUtils();
 	/**
 	 * FreeForm Source:
 	 * 	 File: 		SVTVK
@@ -93,14 +94,12 @@ public class TdsMaintResponseOutputterController_SVT057 {
 	            
 				//do SELECT
 				logger.info("Before SELECT ...");
-				
 				Map params = null;
-				
-				if(dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())){ 
-	            	if(!"0".equals(dao.getSvvk_dts())){ params = dao.getKeys(); }
-	            }
+				if(strUtils.isNotNull(dao.getSvvk_kd())){ 
+					params = dao.getKeys();
+				}
 				//needed for fetch of specific record (ajax)
-	            if(dao.getSvvk_dts()!=null && !"".equals(dao.getSvvk_dts())){ 
+	            if(strUtils.isNotNull(dao.getSvvk_dts())){ 
 	            	if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
 	            }
 				//get list
@@ -178,15 +177,17 @@ public class TdsMaintResponseOutputterController_SVT057 {
             //rules
             SVT057R_U rulerLord = new SVT057R_U();
 			//Key population in order to check if the record exists (for CREATE) and DELETE.
-            Map params = new HashMap();
-            params = dao.getKeys();
-            
+            Map params = dao.getKeys();
+            //needed for fetch of specific record (ajax)
+            if(strUtils.isNotNull(dao.getSvvk_dts())){ 
+            	if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
+            }
 			//Start processing now
-            if(userName!=null && !"".equals(userName)){
+            if(strUtils.isNotNull(userName)){
 				if("D".equals(mode)){
 					if(rulerLord.isValidInputForDelete(dao, userName, mode)){
 						logger.info("Before DELETE ...");
-						//this.svtvkDaoService.deleteAll(params);
+						this.svtvkDaoService.deleteAll(params);
 					}else{
 						//write JSON error output
 						errMsg = "ERROR on DELETE: invalid?  Try to check: <DaoServices>.delete";
@@ -206,11 +207,16 @@ public class TdsMaintResponseOutputterController_SVT057 {
 								sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
 							}else{
 								logger.info("CREATE new ...");
+								logger.info(dao.getSvvk_kd());
+								logger.info(dao.getSvvk_dts());
+								logger.info(dao.getSvvk_omr());
+								logger.info(dao.getSvvk_krs());
+								
 								resultDao = this.svtvkDaoService.create(dao);
 							}
 						}else if("U".equals(mode)){
 								logger.info("UPDATE ...");
-								//resultDao = this.svtvkDaoService.update(dao);
+								resultDao = this.svtvkDaoService.update(dao);
 						}
 						if(resultDao == null){
 							errMsg = "ERROR on CREATE/UPDATE";

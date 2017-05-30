@@ -3,6 +3,7 @@ package no.systema.jservices.tds.z.maintenance.felles.controller.rules;
 import org.springframework.validation.ValidationUtils;
 
 import no.systema.jservices.common.dao.SvtvkDao;
+import no.systema.jservices.common.util.StringUtils;
 
 /**
  * 
@@ -10,6 +11,7 @@ import no.systema.jservices.common.dao.SvtvkDao;
  * @date Maj 19, 2017
  */
 public class SVT057R_U {
+	private final StringUtils strUtils = new StringUtils();
 
 	/**
 	 * 
@@ -23,10 +25,10 @@ public class SVT057R_U {
 		
 		if( (user!=null && !"".equals(user)) && (mode!=null && !"".equals(mode)) ){
 			//check dao
-			if( (dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())) &&
-				(dao.getSvvk_dts()!=null && !"".equals(dao.getSvvk_dts())) && 
-				(dao.getSvvk_omr()!=null && !"".equals(dao.getSvvk_omr())) && 
-				(dao.getSvvk_krs()!=null && !"".equals(dao.getSvvk_krs())) ){
+			if( (this.strUtils.isNotNull(dao.getSvvk_kd())) &&
+				(this.strUtils.isNotNull(dao.getSvvk_dts())) && 
+				(this.strUtils.isNotNull(dao.getSvvk_omr())) && 
+				(this.strUtils.isNotNull(dao.getSvvk_krs())) ){
 			}else{
 				retval = false;
 			}
@@ -45,9 +47,8 @@ public class SVT057R_U {
 	public boolean isValidInputForDelete(SvtvkDao dao, String user, String mode){
 		boolean retval = true;
 		if( (user!=null && !"".equals(user)) && (mode!=null && !"".equals(mode)) ){
-			if( (dao.getSvvk_kd()!=null && !"".equals(dao.getSvvk_kd())) &&
-				(dao.getSvvk_dts()!=null && !"".equals(dao.getSvvk_dts())) && 
-				(dao.getSvvk_omr()!=null && !"".equals(dao.getSvvk_omr())) ){
+			if( (this.strUtils.isNotNull(dao.getSvvk_kd())) &&
+				(this.strUtils.isNotNull(dao.getSvvk_dts())) ){
 			}else{
 				retval = false;
 			}
@@ -64,18 +65,23 @@ public class SVT057R_U {
 	 */
 	public void updateNumericFieldsIfNull(SvtvkDao dao){
 		String ZERO = "0";
-		
-		if(dao.getSvvk_dts()==null || "".equals(dao.getSvvk_dts())){
+		//Integers
+		if(this.strUtils.isNull(dao.getSvvk_dts())){
 			dao.setSvvk_dts(ZERO);
 		}
-		if(dao.getSvvk_dte()==null || "".equals(dao.getSvvk_dte())){
+		if(this.strUtils.isNull(dao.getSvvk_dte())){
 			dao.setSvvk_dte(ZERO);
 		}
-		if(dao.getSvvk_omr()==null || "".equals(dao.getSvvk_omr())){
+		if(this.strUtils.isNull(dao.getSvvk_omr())){
 			dao.setSvvk_omr(ZERO);
 		}
-		if(dao.getSvvk_krs()==null || "".equals(dao.getSvvk_krs())){
+		
+		//SONET (10,6)
+		if(this.strUtils.isNull(dao.getSvvk_krs())){
 			dao.setSvvk_krs(ZERO);
+		}else{
+			String tmp = dao.getSvvk_krs().replace(",", ".");
+			dao.setSvvk_krs(tmp);
 		}
 	}
 }
