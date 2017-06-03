@@ -30,12 +30,12 @@ import javax.servlet.http.HttpSession;
 //Application
 //import no.systema.jservices.model.dao.entities.GenericTableColumnsDao;
 import no.systema.jservices.model.dao.services.BridfDaoServices;
-import no.systema.jservices.common.dao.services.SvtvkDaoService;
-import no.systema.jservices.common.dao.SvtvkDao;
+import no.systema.jservices.common.dao.services.SvtlvDaoService;
+import no.systema.jservices.common.dao.SvtlvDao;
 import no.systema.jservices.common.json.JsonResponseWriter2;
 import no.systema.jservices.common.util.StringUtils;
 import no.systema.jservices.jsonwriter.JsonResponseWriter;
-import no.systema.jservices.tds.z.maintenance.felles.controller.rules.SVT057R_U;
+import no.systema.jservices.tds.z.maintenance.felles.controller.rules.SVT058R_U;
 //rules
 
 
@@ -51,31 +51,31 @@ import no.systema.jservices.tds.z.maintenance.felles.controller.rules.SVT057R_U;
  */
 
 @Controller
-public class TdsMaintResponseOutputterController_SVT057 {
-	private static Logger logger = Logger.getLogger(TdsMaintResponseOutputterController_SVT057.class.getName());
+public class TdsMaintResponseOutputterController_SVT058 {
+	private static Logger logger = Logger.getLogger(TdsMaintResponseOutputterController_SVT058.class.getName());
 	private final StringUtils strUtils = new StringUtils();
 	/**
 	 * FreeForm Source:
-	 * 	 File: 		SVTVK
-	 * 	 PGM:		SVT057R
+	 * 	 File: 		SVTLV
+	 * 	 PGM:		SVT058R
 	 * 	 Member: 	TDS Felles Maintenance - SELECT LIST or SELECT SPECIFIC
 	 *  
 	 * 
 	 * @return
-	 * @Example SELECT *: http://gw.systema.no:8080/syjservices/syjsSVT057R.do?user=OSCAR&sv...
-	 * @Example SELECT specific: http://gw.systema.no:8080/syjservices/syjsSVT057R.do?user=OSCAR&sv...
+	 * @Example SELECT *: http://gw.systema.no:8080/syjservices/syjsSVT058R.do?user=OSCAR&sv...
+	 * @Example SELECT specific: http://gw.systema.no:8080/syjservices/syjsSVT058R.do?user=OSCAR&sv...
 	 * 
 	 */
-	@RequestMapping(value="syjsSVT057R.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="syjsSVT058R.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String syjsRList( HttpSession session, HttpServletRequest request) {
 		String SQL_WILD_CARD = "%";
-		JsonResponseWriter2<SvtvkDao> jsonWriter = new JsonResponseWriter2<SvtvkDao>();
+		JsonResponseWriter2<SvtlvDao> jsonWriter = new JsonResponseWriter2<SvtlvDao>();
 		
 		StringBuffer sb = new StringBuffer();
-		List<SvtvkDao> list = null;
+		List<SvtlvDao> list = null;
 		try{
-			logger.info("Inside syjsSVT057R");
+			logger.info("Inside syjsSVT058R");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			//Check ALWAYS user in BRIDF
@@ -88,22 +88,22 @@ public class TdsMaintResponseOutputterController_SVT057 {
 			//Start processing now
 			if(userName!=null && !"".equals(userName)){
 				//bind attributes is any
-				SvtvkDao dao = new SvtvkDao();
+				SvtlvDao dao = new SvtlvDao();
 				ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
 	            binder.bind(request);
 	            
 				//do SELECT
 				logger.info("Before SELECT ...");
 				Map params = null;
-				if(strUtils.isNotNull(dao.getSvvk_kd())){ 
+				if(strUtils.isNotNull(dao.getSvlv_kd())){ 
 					params = dao.getKeys();
 				}
 				//needed for fetch of specific record (ajax)
-	            if(strUtils.isNotNull(dao.getSvvk_dts())){ 
-	            	if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
-	            }
+	            //if(strUtils.isNotNull(dao.getSvvk_dts())){ 
+	            	//if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
+	            //}
 				//get list
-				list = this.svtvkDaoService.findAll(params);
+				list = this.svtlvDaoService.findAll(params);
 				
 				
 				if (list != null){
@@ -138,12 +138,12 @@ public class TdsMaintResponseOutputterController_SVT057 {
 	/**
 	 * 
 	 * Update Database DML operations
-	 * File: 	SVTVK
-	 * PGM:		SVT057
+	 * File: 	SVTLV
+	 * PGM:		SVT058
 	 * Member: 	TDS Maintenance - UPDATE SPECIFIC
 	 * Note: This method does not contain UPDATE. Only CREATE/DELETE. Ref. AS400 UC 
 	 * 
-	 * @Example UPDATE: http://gw.systema.no:8080/syjservices/syjsSVT057R_U.do?user=OSCAR&mode=U/A/D&svt...
+	 * @Example UPDATE: http://gw.systema.no:8080/syjservices/syjsSVT058R_U.do?user=OSCAR&mode=U/A/D&svt...
 	 *
 	 * @param session
 	 * @param request
@@ -151,14 +151,14 @@ public class TdsMaintResponseOutputterController_SVT057 {
 	 * 
 	 */
 	
-	@RequestMapping(value="syjsSVT057R_U.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="syjsSVT058R_U.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String syjsR_U( HttpSession session, HttpServletRequest request) {
 		JsonResponseWriter jsonWriter = new JsonResponseWriter();
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsSVT057R_U");
+			logger.info("Inside syjsSVT058R_U");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			String mode = request.getParameter("mode");
@@ -170,24 +170,21 @@ public class TdsMaintResponseOutputterController_SVT057 {
 			StringBuffer dbErrorStackTrace = new StringBuffer();
 			
 			//bind attributes is any
-			SvtvkDao dao = new SvtvkDao();
-			SvtvkDao resultDao = new SvtvkDao();
+			SvtlvDao dao = new SvtlvDao();
+			SvtlvDao resultDao = new SvtlvDao();
 			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
             binder.bind(request);
             //rules
-            SVT057R_U rulerLord = new SVT057R_U();
+            SVT058R_U rulerLord = new SVT058R_U();
 			//Key population in order to check if the record exists (for CREATE) and DELETE.
             Map params = dao.getKeys();
-            //needed for fetch of specific record (ajax)
-            if(strUtils.isNotNull(dao.getSvvk_dts())){ 
-            	if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
-            }
+            
 			//Start processing now
             if(strUtils.isNotNull(userName)){
 				if("D".equals(mode)){
 					if(rulerLord.isValidInputForDelete(dao, userName, mode)){
 						logger.info("Before DELETE ...");
-						this.svtvkDaoService.deleteAll(params);
+						this.svtlvDaoService.deleteAll(params);
 					}else{
 						//write JSON error output
 						errMsg = "ERROR on DELETE: invalid?  Try to check: <DaoServices>.delete";
@@ -196,27 +193,23 @@ public class TdsMaintResponseOutputterController_SVT057 {
 					}
 				}else{
 				  if(rulerLord.isValidInput(dao, userName, mode)){
-						List<SvtvkDao> list = new ArrayList<SvtvkDao>();
+						List<SvtlvDao> list = new ArrayList<SvtlvDao>();
 						rulerLord.updateNumericFieldsIfNull(dao);
 						//do ADD
 						if("A".equals(mode)){
-							list = this.svtvkDaoService.findAll(params);
+							list = this.svtlvDaoService.findAll(params);
 							if(list!=null && list.size()>0){
 								errMsg = "ERROR on CREATE/UPDATE: Record exists already";
 								status = "error";
 								sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
 							}else{
 								logger.info("CREATE new ...");
-								//logger.info(dao.getSvvk_kd());
-								//logger.info(dao.getSvvk_dts());
-								//logger.info(dao.getSvvk_omr());
-								//logger.info(dao.getSvvk_krs());
 								
-								resultDao = this.svtvkDaoService.create(dao);
+								resultDao = this.svtlvDaoService.create(dao);
 							}
 						}else if("U".equals(mode)){
 								logger.info("UPDATE ...");
-								resultDao = this.svtvkDaoService.update(dao);
+								resultDao = this.svtlvDaoService.update(dao);
 						}
 						if(resultDao == null){
 							errMsg = "ERROR on CREATE/UPDATE";
@@ -260,12 +253,12 @@ public class TdsMaintResponseOutputterController_SVT057 {
 	//----------------
 	//WIRED SERVICES
 	//----------------
-	@Qualifier ("svtvkDaoService")
-	private SvtvkDaoService svtvkDaoService;
+	@Qualifier ("svtlvDaoService")
+	private SvtlvDaoService svtlvDaoService;
 	@Autowired
 	@Required
-	public void setSvtvkDaoService (SvtvkDaoService value){ this.svtvkDaoService = value; }
-	public SvtvkDaoService getSvtvkDaoService(){ return this.svtvkDaoService; }
+	public void setSvtlvDaoService (SvtlvDaoService value){ this.svtlvDaoService = value; }
+	public SvtlvDaoService getSvtlvDaoService(){ return this.svtlvDaoService; }
 	
 	
 	
