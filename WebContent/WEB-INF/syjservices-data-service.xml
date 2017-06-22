@@ -36,6 +36,11 @@
   <bean id="svtx15f_ExtraMangdDaoServices" class="no.systema.jservices.tds.model.dao.services.Svtx15f_ExtraMangdDaoServicesImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
   </bean>
+  <bean id="svxkodfDaoServices" class="no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.services.SvxkodfDaoServicesImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+  </bean>
+  
+  
   
   
   
