@@ -78,6 +78,8 @@ public class TdsMaintResponseOutputterController_SVT057 {
 			logger.info("Inside syjsSVT057R");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
+			String distinct = request.getParameter("distinct");
+			
 			//Check ALWAYS user in BRIDF
             String userName = this.bridfDaoServices.findNameById(user);
             //DEBUG --> logger.info("USERNAME:" + userName + "XX");
@@ -103,7 +105,13 @@ public class TdsMaintResponseOutputterController_SVT057 {
 	            	if(!"0".equals(dao.getSvvk_dts())){ params.put("svvk_dts", dao.getSvvk_dts()); }
 	            }
 				//get list
-				list = this.svtvkDaoService.findAll(params);
+	            if(strUtils.isNotNull(distinct)){
+	            	//list of codes
+	            	list = this.svtvkDaoService.findAllDistinct("svvk_kd");
+	            }else{
+	            	//default
+	            	list = this.svtvkDaoService.findAll(params);
+	            }
 				
 				
 				if (list != null){

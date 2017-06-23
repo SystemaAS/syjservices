@@ -44,7 +44,7 @@ import no.systema.jservices.jsonwriter.JsonResponseWriter;
  * All communication to the outside world is done through this gateway.
  * 
  * @author oscardelatorre
- * @date Sep 2, 2016
+ * @date Jun 23, 2017
  * 
  */
 
@@ -54,24 +54,24 @@ public class TdsMaintResponseOutputterController_SVX030 {
 	
 	/**
 	 * FreeForm Source:
-	 * 	 File: 		DKXGH
-	 * 	 PGM:		DKX030
-	 * 	 Member: 	SKAT Maintenance - SELECT LIST or SELECT SPECIFIC
+	 * 	 File: 		SVXGH
+	 * 	 PGM:		SVX030
+	 * 	 Member: 	TDS Maintenance - SELECT LIST or SELECT SPECIFIC
 	 *  
 	 * 
 	 * @return
-	 * @Example SELECT *: http://gw.systema.no:8080/syjservicesst/syjsDKX030R.do?user=OSCAR
-	 * @Example SELECT specific: http://gw.systema.no:8080/syjservicesst/syjsDKX030R.do?user=OSCAR&tggnr=TEST
+	 * @Example SELECT *: http://gw.systema.no:8080/syjservicesst/syjsSVX030R.do?user=OSCAR
+	 * @Example SELECT specific: http://gw.systema.no:8080/syjservicesst/syjsSVX030R.do?user=OSCAR&tggnr=TEST
 	 * 
 	 */
-	@RequestMapping(value="syjsDKX030R.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="syjsSVX030R.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String syjsRList( HttpSession session, HttpServletRequest request) {
 		JsonResponseWriter jsonWriter = new JsonResponseWriter();
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsDKX030R");
+			logger.info("Inside syjsSVX030R");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			String oneMatch = request.getParameter("om");
@@ -137,25 +137,25 @@ public class TdsMaintResponseOutputterController_SVX030 {
 	/**
 	 * 
 	 * Update Database DML operations
-	 * File: 	DKXGH
-	 * PGM:		DKX030
-	 * Member: 	SKAT Maintenance - UPDATE SPECIFIC
+	 * File: 	SVXGH
+	 * PGM:		SVX030
+	 * Member: 	TDS Maintenance - UPDATE SPECIFIC
 	 * 
-	 * @Example UPDATE: http://gw.systema.no:8080/syjservicesst/syjsDKX030R_U.do?user=OSCAR&mode=U/A/D
+	 * @Example UPDATE: http://gw.systema.no:8080/syjservicesst/syjsSVX030R_U.do?user=OSCAR&mode=U/A/D
 	 *
 	 * @param session
 	 * @param request
 	 * @return
 	 * 
 	 */
-	@RequestMapping(value="syjsDKX030R_U.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="syjsSVX030R_U.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String syjsR_U( HttpSession session, HttpServletRequest request) {
 		JsonResponseWriter jsonWriter = new JsonResponseWriter();
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsDKX030R_U");
+			logger.info("Inside syjsSVX030R_U");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			String mode = request.getParameter("mode");
