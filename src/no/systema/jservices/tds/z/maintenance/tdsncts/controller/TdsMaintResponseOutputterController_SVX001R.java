@@ -67,7 +67,7 @@ public class TdsMaintResponseOutputterController_SVX001R {
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsSVXKODFR.do");
+			logger.info("Inside syjsSVX001R.do");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 	

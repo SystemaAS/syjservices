@@ -16,12 +16,13 @@ public class BridfSqlTester {
 	//sql compact execution
 	private void runIt(){
 		try{
-			String IP_SYSTEMA_AS400 = "10.13.1.22"; 
+			String IP_SYSTEMA_AS400 = "10.13.3.22"; 
 			String userId = "systema";
 			String pass = "straffe12";
 			
 			String DRIVER = "com.ibm.as400.access.AS400JDBCDriver"; 
 			String URL = "jdbc:as400://" + IP_SYSTEMA_AS400 + ";naming=system";
+			//String URL = "jdbc:as400://" + IP_SYSTEMA_AS400 ;
 			
 			Connection conn = null;
 			 
@@ -34,7 +35,7 @@ public class BridfSqlTester {
 				 //SQL-statements
 				
 				 //SQL 1 (Christer)
-				 String sql = "select LTRIM(RTRIM(bibrid)) bibrid, bipo, bibesk from sysped/bridf  where bibrid = ?";
+				 String sql = "select LTRIM(RTRIM(bibrid)) bibrid, bipo, bibesk from sysped.bridf  where bibrid = ?";
 				 PreparedStatement stmt = conn.prepareStatement(sql);
 				 stmt.setString(1, "OSCAR");
 				 ResultSet rs = stmt.executeQuery();

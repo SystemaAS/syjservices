@@ -16,7 +16,7 @@ public class TdsSqlTester {
 	//sql compact execution
 	private void runIt(){
 		try{
-			String IP_SYSTEMA_AS400 = "10.13.1.22"; 
+			String IP_SYSTEMA_AS400 = "10.13.3.22"; 
 			String userId = "systema";
 			String pass = "straffe12";
 			
