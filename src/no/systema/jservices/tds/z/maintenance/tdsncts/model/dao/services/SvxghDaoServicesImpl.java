@@ -125,6 +125,39 @@ public class SvxghDaoServicesImpl implements SvxghDaoServices {
 		
 		return retval;
 	}
+	
+	
+	/**
+	 * Used when adjusting the used (brukt) guarantee
+	 */
+	public int adjustBruktGuarantee (Object daoObj, StringBuffer errorStackTrace ){
+		
+		int retval = 0;
+		
+		try{
+			SvxghDao dao = (SvxghDao)daoObj;
+			StringBuffer sql = new StringBuffer();
+			sql.append(" UPDATE svxgh SET  tggblb = ?  ");
+			//id's
+			sql.append(" WHERE tggnr = ? ");
+			//params
+			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
+						dao.getTggblb(),
+						//id's
+						dao.getTggnr(),
+						} );
+			
+		}catch(Exception e){
+			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.info(writer.toString());
+			//Chop the message to comply to JSON-validation
+			errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+			retval = -1;
+		}
+		return retval;
+	
+	}
+	
 	/**
 	 * UPDATE
 	 */

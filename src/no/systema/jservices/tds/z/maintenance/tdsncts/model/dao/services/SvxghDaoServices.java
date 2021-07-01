@@ -11,4 +11,5 @@ import no.systema.jservices.model.dao.services.IDaoServices;
  */
 public interface SvxghDaoServices extends IDaoServices { 
 	public List findByIdExactMatch (String id, StringBuffer errorStackTrace );
+	public int adjustBruktGuarantee (Object obj, StringBuffer errorStackTrace );
 }

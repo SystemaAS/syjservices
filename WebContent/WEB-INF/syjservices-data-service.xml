@@ -42,6 +42,9 @@
   <bean id="svxghDaoServices" class="no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.services.SvxghDaoServicesImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
   </bean>
+  <bean id="svxhDaoServices" class="no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.services.SvxhDaoServicesImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+  </bean>
   
   <bean id="svxvDaoServices" class="no.systema.jservices.tds.ncts.model.dao.services.SvxvDaoServicesImpl">
       <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
