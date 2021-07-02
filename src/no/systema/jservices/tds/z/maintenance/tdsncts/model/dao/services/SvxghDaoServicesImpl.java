@@ -169,7 +169,7 @@ public class SvxghDaoServicesImpl implements SvxghDaoServices {
 			StringBuffer sql = new StringBuffer();
 			sql.append(" UPDATE svxgh SET  tgkna = ?, tgtina = ?, tgnaa = ?, tgada1 = ?, tgpna = ?, tgpsa = ?, tglka = ?, ");
 			sql.append(" tggty = ?, tggvk = ?, tggbl = ?, tggblb = ?, tgtsd = ?, tggfv = ?, tgakny = ?, tgakgm = ?, ");
-			sql.append(" tgprm = ?  ");
+			sql.append(" tgprm = ?, tgst = ?  ");
 			
 			//id's
 			sql.append(" WHERE tggnr = ? ");
@@ -177,7 +177,7 @@ public class SvxghDaoServicesImpl implements SvxghDaoServices {
 			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
 						dao.getTgkna(), dao.getTgtina(), dao.getTgnaa(), dao.getTgada1(), dao.getTgpna(), dao.getTgpsa(), dao.getTglka(),
 						dao.getTggty(), dao.getTggvk(), dao.getTggbl(), dao.getTggblb(), dao.getTgtsd(), dao.getTggfv(), dao.getTgakny(), dao.getTgakgm(),
-						dao.getTgprm(),
+						dao.getTgprm(), dao.getTgst(),
 						//id's
 						dao.getTggnr(),
 						} );
