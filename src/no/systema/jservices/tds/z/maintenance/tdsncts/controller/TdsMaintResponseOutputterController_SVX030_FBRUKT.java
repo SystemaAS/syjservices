@@ -176,7 +176,7 @@ public class TdsMaintResponseOutputterController_SVX030_FBRUKT {
 			if(userName!=null && !"".equals(userName)){
 				int dmlRetval = 0;
 				if(rulerLord.isValidInput(dao, userName)){
-					logger.info("Before UPDATE ...");
+					logger.warn("Before UPDATE ...");
 					dmlRetval = this.svxhDaoServices.releaseGuarantee(dao, dbErrorStackTrace);
 						
 						
@@ -253,7 +253,7 @@ public class TdsMaintResponseOutputterController_SVX030_FBRUKT {
 			if(userName!=null && !"".equals(userName)){
 				int dmlRetval = 0;
 				if(StringUtils.isNotEmpty(dao.getTggnr()) && StringUtils.isNotEmpty(dao.getTggblb()) ){
-					logger.info("Before UPDATE ...");
+					logger.warn("Before UPDATE ...");
 					dmlRetval = this.svxghDaoServices.adjustBruktGuarantee(dao, dbErrorStackTrace);
 						
 				}else{

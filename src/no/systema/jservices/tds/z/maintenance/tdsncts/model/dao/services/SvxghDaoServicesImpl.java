@@ -105,15 +105,15 @@ public class SvxghDaoServicesImpl implements SvxghDaoServices {
 			StringBuffer sql = new StringBuffer();
 			//DEBUG --> logger.info("mydebug");
 			sql.append(" INSERT INTO svxgh (tggnr, tgkna, tgtina, tgnaa, tgada1, tgpna, tgpsa, tglka, tgtsd, tggty, ");
-			sql.append(" tggfv, tgakny, tgakgm, tggbl, tggvk, tggblb, tgprm ) ");
+			sql.append(" tggfv, tgakny, tgakgm, tggbl, tggvk, tggblb, tgprm, tgdt, tgdtr, tgusr ) ");
 			
 			sql.append(" VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
-			sql.append(" ?, ?, ?, ?, ?, ?, ? ) ");
+			sql.append(" ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ");
 			
 			//params
 			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { dao.getTggnr(), dao.getTgkna(), dao.getTgtina(), dao.getTgnaa(), dao.getTgada1(),
 				dao.getTgpna(), dao.getTgpsa(), dao.getTglka(), dao.getTgtsd(), dao.getTggty(), dao.getTggfv(), dao.getTgakny(), dao.getTgakgm(), dao.getTggbl(),  
-				dao.getTggvk(), dao.getTggblb(), dao.getTgprm()  } );
+				dao.getTggvk(), dao.getTggblb(), dao.getTgprm(), dao.getTgdt(), dao.getTgdtr(), dao.getTgusr()  } );
 			
 		}catch(Exception e){
 			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
@@ -169,7 +169,7 @@ public class SvxghDaoServicesImpl implements SvxghDaoServices {
 			StringBuffer sql = new StringBuffer();
 			sql.append(" UPDATE svxgh SET  tgkna = ?, tgtina = ?, tgnaa = ?, tgada1 = ?, tgpna = ?, tgpsa = ?, tglka = ?, ");
 			sql.append(" tggty = ?, tggvk = ?, tggbl = ?, tggblb = ?, tgtsd = ?, tggfv = ?, tgakny = ?, tgakgm = ?, ");
-			sql.append(" tgprm = ?, tgst = ?  ");
+			sql.append(" tgprm = ?, tgst = ?, tgdt = ?, tgdtr = ?, tgusr = ?   ");
 			
 			//id's
 			sql.append(" WHERE tggnr = ? ");
@@ -177,7 +177,7 @@ public class SvxghDaoServicesImpl implements SvxghDaoServices {
 			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
 						dao.getTgkna(), dao.getTgtina(), dao.getTgnaa(), dao.getTgada1(), dao.getTgpna(), dao.getTgpsa(), dao.getTglka(),
 						dao.getTggty(), dao.getTggvk(), dao.getTggbl(), dao.getTggblb(), dao.getTgtsd(), dao.getTggfv(), dao.getTgakny(), dao.getTgakgm(),
-						dao.getTgprm(), dao.getTgst(),
+						dao.getTgprm(), dao.getTgst(), dao.getTgdt(), dao.getTgdtr(), dao.getTgusr(),
 						//id's
 						dao.getTggnr(),
 						} );

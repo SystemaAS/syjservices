@@ -71,7 +71,7 @@ public class TdsMaintResponseOutputterController_SVX030 {
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsSVX030R");
+			logger.warn("Inside syjsSVX030R");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			String oneMatch = request.getParameter("om");
@@ -91,13 +91,13 @@ public class TdsMaintResponseOutputterController_SVX030 {
 	            //At this point we now know if we are selecting a specific or all the db-table content (select *)
 	            List list = null;
 				//do SELECT
-				logger.info("Before SELECT ...");
+				logger.warn("Before SELECT ...");
 	            if(dao.getTggnr()!=null && !"".equals(dao.getTggnr())){
 	            	if(oneMatch!=null && !"".equals(oneMatch)){
-	            		logger.info("findByIdExactMatch");
+	            		logger.warn("findByIdExactMatch");
 	            		list = this.svxghDaoServices.findByIdExactMatch(dao.getTggnr(), dbErrorStackTrace);
 	            	}else{
-	            		logger.info("findById");
+	            		logger.warn("findById");
 	            		list = this.svxghDaoServices.findById(dao.getTggnr(), dbErrorStackTrace);
 	            	}
 				}else{
@@ -112,7 +112,7 @@ public class TdsMaintResponseOutputterController_SVX030 {
 					//write JSON error output
 					errMsg = "ERROR on SELECT: list is NULL?  Try to check: <DaoServices>.getList";
 					status = "error";
-					logger.info("After SELECT:" + " " + status + errMsg );
+					logger.error("After SELECT:" + " " + status + errMsg );
 					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
 				}
 			}else{
@@ -155,7 +155,7 @@ public class TdsMaintResponseOutputterController_SVX030 {
 		StringBuffer sb = new StringBuffer();
 		
 		try{
-			logger.info("Inside syjsSVX030R_U");
+			logger.warn("Inside syjsSVX030R_U");
 			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
 			String user = request.getParameter("user");
 			String mode = request.getParameter("mode");
@@ -170,7 +170,7 @@ public class TdsMaintResponseOutputterController_SVX030 {
 			SvxghDao dao = new SvxghDao();
 			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
             binder.bind(request);
-            logger.info("TGGNR:" + dao.getTggnr());
+            logger.warn("TGGNR:" + dao.getTggnr());
             //rules
             SVX030R_U rulerLord = new SVX030R_U();
 			//Start processing now
@@ -187,7 +187,7 @@ public class TdsMaintResponseOutputterController_SVX030 {
 					}
 				}else{
 				  if(rulerLord.isValidInput(dao, userName, mode)){
-						logger.info("Before UPDATE ...");
+						logger.warn("Before UPDATE ...");
 						List<SvxghDao> list = new ArrayList<SvxghDao>();
 						rulerLord.updateNumericFieldsIfNull(dao);
 						
