@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +41,7 @@ import no.systema.jservices.jsonwriter.JsonResponseWriter;
 
 @Controller
 public class TdsMaintResponseOutputterController_SVX001R {
-	private static Logger logger = Logger.getLogger(TdsMaintResponseOutputterController_SVX001R.class.getName());
+	private static Logger logger = LogManager.getLogger(TdsMaintResponseOutputterController_SVX001R.class.getName());
 	
 	/**
 	 * FreeForm Source:

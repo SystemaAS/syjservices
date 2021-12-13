@@ -2,7 +2,7 @@ package no.systema.jservices.tds.model.dao.services;
 import java.sql.PreparedStatement;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
@@ -13,7 +13,7 @@ import no.systema.jservices.tds.model.dao.mapper.Svtx15f_ExtraMangdMapper;
 
 
 public class Svtx15f_ExtraMangdDaoServicesImpl implements Svtx15f_ExtraMangdDaoServices {
-	private static Logger logger = Logger.getLogger(Svtx15f_ExtraMangdDaoServicesImpl.class.getName());
+	private static Logger logger = LogManager.getLogger(Svtx15f_ExtraMangdDaoServicesImpl.class.getName());
 	
 	/**
 	 * 

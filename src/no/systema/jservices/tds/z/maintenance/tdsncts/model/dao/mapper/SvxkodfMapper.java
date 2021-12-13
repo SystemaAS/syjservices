@@ -1,6 +1,6 @@
 package no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.mapper;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.jdbc.core.RowMapper;
 
 import no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.entities.SvxkodfDao;
@@ -18,7 +18,7 @@ import java.util.List;
  * 
  */
 public class SvxkodfMapper implements RowMapper {
-	private static Logger logger = Logger.getLogger(SvxkodfMapper.class.getName());
+	private static Logger logger = LogManager.getLogger(SvxkodfMapper.class.getName());
 	
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	

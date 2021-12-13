@@ -2,7 +2,7 @@ package no.systema.jservices.model.dao.services;
 import java.sql.PreparedStatement;
 import java.util.*;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
@@ -13,7 +13,7 @@ import no.systema.jservices.tds.model.dao.mapper.Svtx15f_ExtraMangdMapper;
 
 
 public class Svtx08f2_CountryCodeRegionDaoServicesImpl implements Svtx08f2_CountryCodeRegionDaoServices {
-	private static Logger logger = Logger.getLogger(Svtx08f2_CountryCodeRegionDaoServicesImpl.class.getName());
+	private static Logger logger = LogManager.getLogger(Svtx08f2_CountryCodeRegionDaoServicesImpl.class.getName());
 	
 		
 	/**

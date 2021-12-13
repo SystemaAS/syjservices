@@ -1,6 +1,6 @@
 package no.systema.jservices.tds.model.dao.mapper;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.*;
 import org.springframework.jdbc.core.RowMapper;
 
 import no.systema.jservices.model.dao.entities.GenericTableColumnsDao;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * 
  */
 public class Svtx15f_ExtraMangdMapper implements RowMapper {
-	private static Logger logger = Logger.getLogger(Svtx15f_ExtraMangdMapper.class.getName());
+	private static Logger logger = LogManager.getLogger(Svtx15f_ExtraMangdMapper.class.getName());
 	
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	GenericTableColumnsDao dbTable = new GenericTableColumnsDao();

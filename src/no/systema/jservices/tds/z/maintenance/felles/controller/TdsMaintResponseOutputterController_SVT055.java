@@ -9,8 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+ 
+import org.apache.logging.log4j.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -51,7 +51,7 @@ import no.systema.jservices.tds.z.maintenance.felles.controller.rules.SVT055R_U;
 
 @Controller
 public class TdsMaintResponseOutputterController_SVT055 {
-	private static Logger logger = Logger.getLogger(TdsMaintResponseOutputterController_SVT055.class.getName());
+	private static Logger logger = LogManager.getLogger(TdsMaintResponseOutputterController_SVT055.class.getName());
 	
 	/**
 	 * FreeForm Source:
