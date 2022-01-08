@@ -1,6 +1,6 @@
 package no.systema.jservices.tds.z.maintenance.tdsncts.controller.rules;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 
 import no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.entities.SvxkodfDao;
 /**
@@ -9,7 +9,7 @@ import no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.entities.Svxkodf
  * @date Jun 22, 2017
  */
 public class SVX001R_U {
-	private static Logger logger = LogManager.getLogger(SVX001R_U.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(SVX001R_U.class.getName());
 	
 	/**
 	 * 

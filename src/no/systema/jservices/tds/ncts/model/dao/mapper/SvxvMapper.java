@@ -1,6 +1,6 @@
 package no.systema.jservices.tds.ncts.model.dao.mapper;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.jdbc.core.RowMapper;
 
 import no.systema.jservices.tds.ncts.model.dao.entities.SvxvDao;
@@ -18,7 +18,7 @@ import java.util.List;
  * 
  */
 public class SvxvMapper implements RowMapper {
-	private static Logger logger = LogManager.getLogger(SvxvMapper.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(SvxvMapper.class.getName());
 	
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
     	SvxvDao dao = new SvxvDao();

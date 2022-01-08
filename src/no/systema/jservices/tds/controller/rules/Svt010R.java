@@ -3,7 +3,7 @@ import no.systema.main.util.DateTimeManager;
 import java.util.*;
 import java.text.*;
 
-import org.apache.logging.log4j.*;
+import org.slf4j.*;
 import org.springframework.stereotype.Component;
 
 import no.systema.jservices.controller.JsonResponseOutputterController;
@@ -28,7 +28,7 @@ public class Svt010R {
 	private DateTimeManager dateTimeMgr = new DateTimeManager();
 	private Svtx15f_ExtraMangdDaoServices svtx15f_ExtraMangdDaoServices;
 	private Svtx08f2_CountryCodeRegionDaoServices svtx08f2_CountryCodeRegionDaoServices;
-	private static Logger logger = LogManager.getLogger(JsonResponseOutputterController.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(JsonResponseOutputterController.class.getName());
 	
 	public Svt010R (Svtx15f_ExtraMangdDaoServices extraMangdService, Svtx08f2_CountryCodeRegionDaoServices countryCodeService){
 		this.svtx15f_ExtraMangdDaoServices = extraMangdService;
