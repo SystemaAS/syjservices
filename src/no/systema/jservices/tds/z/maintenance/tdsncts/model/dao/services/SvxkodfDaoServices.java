@@ -11,4 +11,5 @@ import no.systema.jservices.model.dao.services.IDaoServices;
 public interface SvxkodfDaoServices extends IDaoServices { 
 	public List getList(String code, StringBuffer errorStackTrace);
 	public List findById(String code, String id, StringBuffer errorStackTrace);
+	public int updateComplete(Object daoObj, StringBuffer errorStackTrace);
 }

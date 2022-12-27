@@ -149,6 +149,37 @@ public class SvxkodfDaoServicesImpl implements SvxkodfDaoServices {
 		
 		return retval;
 	}
+	
+	public int updateComplete(Object daoObj, StringBuffer errorStackTrace){
+		int retval = 0;
+
+		try{
+			SvxkodfDao dao = (SvxkodfDao)daoObj;
+			StringBuffer sql = new StringBuffer();
+			sql.append(" UPDATE svxkodf SET tktxtn = ?, tktxte = ?, tkavg = ?, tkank = ?, tktrs = ? " );
+			//id's
+			sql.append(" WHERE tkunik = ? ");
+			sql.append(" AND tkkode = ? ");
+			
+			//params
+			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
+						dao.getTktxtn(), dao.getTktxte(), dao.getTkavg(), dao.getTkank(), dao.getTktrs(),
+						//id's
+						dao.getTkunik(),
+						dao.getTkkode(),
+						
+						} );
+			
+		}catch(Exception e){
+			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.info(writer.toString());
+			//Chop the message to comply to JSON-validation
+			errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+			retval = -1;
+		}
+		
+		return retval;
+	}
 	/**
 	 * 
 	 */
