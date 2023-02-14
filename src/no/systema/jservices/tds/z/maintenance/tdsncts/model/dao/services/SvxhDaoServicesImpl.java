@@ -5,6 +5,7 @@ import java.util.*;
 import org.slf4j.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.entities.FrisokDao;
 import no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.entities.SvxhDao;
 import no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.mapper.SvxhMapper;
 import no.systema.main.util.DbErrorMessageManager;
@@ -190,6 +191,115 @@ public class SvxhDaoServicesImpl implements SvxhDaoServices {
 		
 		return retval;
 	}
+	/**
+	 * Update MRN for 028
+	 * NCTS 5 - Feb.2023
+	 */
+	public int updateMrn028(Object daoObj, StringBuffer errorStackTrace){
+		int retval = 0;
+		
+		try{
+			SvxhDao dao = (SvxhDao)daoObj;
+			StringBuffer sql = new StringBuffer();
+			sql.append(" UPDATE svxh SET thst = ?, thtrnr = ?, thtrdt = ?  ");
+			//id's
+			sql.append(" WHERE thavd = ? ");
+			sql.append(" AND thtdn = ? ");
+			sql.append(" AND thtuid = ? ");
+			
+			//params
+			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
+					    dao.getThst(), dao.getThtrnr(), dao.getThtrdt(),   
+						//id's
+						dao.getThavd(),
+						dao.getThtdn(),
+						dao.getThtuid()
+						} );
+			
+		}catch(Exception e){
+			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.error(writer.toString());
+			//Chop the message to comply to JSON-validation
+			errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+			retval = -1;
+		}
+		
+		return retval;
+	}
+	
+	/**
+	 * Update MRN for 029
+	 * NCTS 5 - Feb.2023
+	 */
+	public int updateMrn029(Object daoObj, StringBuffer errorStackTrace){
+		int retval = 0;
+		
+		try{
+			SvxhDao dao = (SvxhDao)daoObj;
+			logger.warn(dao.toString());
+			StringBuffer sql = new StringBuffer();
+			sql.append(" UPDATE svxh SET thst = ?, thpkl = ?, thws = ?, thddt = ?, thddtk = ?, thdats = ?, thdkav = ?, thdksk = ?,  ");
+			sql.append(" thtssd = ?, thtsn1 = ?, thtsn2 = ?, thtspn = ?, thtsps = ?, thtslk = ?, thtssk = ?, thtet = ?,  ");
+			sql.append(" thomd = ?, thbind = ?  ");
+			//id's
+			sql.append(" WHERE thavd = ? ");
+			sql.append(" AND thtdn = ? ");
+			sql.append(" AND thtuid = ? ");
+			
+			//params
+			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
+						dao.getThst(), dao.getThpkl(), dao.getThws(), dao.getThddt(), dao.getThddtk(), dao.getThdats(), dao.getThdkav(), dao.getThdksk(),
+						dao.getThtssd(), dao.getThtsn1(), dao.getThtsn2(), dao.getThtspn(), dao.getThtsps(), dao.getThtslk(), dao.getThtssk(), dao.getThtet(),
+						dao.getThomd(), dao.getThbind(),
+						//id's
+						dao.getThavd(),
+						dao.getThtdn(),
+						dao.getThtuid()
+						} );
+			
+		}catch(Exception e){
+			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.error(writer.toString());
+			//Chop the message to comply to JSON-validation
+			errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+			retval = -1;
+		}
+		
+		return retval;
+	}
+	
+	public int updateMrn045(Object daoObj, StringBuffer errorStackTrace){
+		int retval = 0;
+		
+		try{
+			SvxhDao dao = (SvxhDao)daoObj;
+			StringBuffer sql = new StringBuffer();
+			sql.append(" UPDATE svxh SET thst = ?  ");
+			//id's
+			sql.append(" WHERE thavd = ? ");
+			sql.append(" AND thtdn = ? ");
+			sql.append(" AND thtuid = ? ");
+			
+			//params
+			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
+					    dao.getThst(),   
+						//id's
+						dao.getThavd(),
+						dao.getThtdn(),
+						dao.getThtuid()
+						} );
+			
+		}catch(Exception e){
+			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.error(writer.toString());
+			//Chop the message to comply to JSON-validation
+			errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+			retval = -1;
+		}
+		
+		return retval;
+	}
+	
 	/**
 	 * DELETE
 	 */

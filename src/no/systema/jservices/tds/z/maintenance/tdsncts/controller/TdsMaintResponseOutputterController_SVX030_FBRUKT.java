@@ -295,6 +295,309 @@ public class TdsMaintResponseOutputterController_SVX030_FBRUKT {
 		return sb.toString();
 	}
 	
+	/**
+	 * Method used for NCTS 5 - IE028 response (MRN Allocated after sänding IE015 (NCTS export)
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="syjsSVXH_U_MRN_028.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String syjsSVXH_U_MRN_028( HttpSession session, HttpServletRequest request) {
+		JsonResponseWriter jsonWriter = new JsonResponseWriter();
+		StringBuffer sb = new StringBuffer();
+		
+		try{
+			logger.warn("Inside syjsSVXH_U_MRN_028");
+			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
+			String user = request.getParameter("user");
+			//Check ALWAYS user in BRIDF
+            String userName = this.bridfDaoServices.findNameById(user);
+            //DEBUG --> logger.info("USERNAME:" + userName + "XX");
+            String errMsg = "";
+			String status = "ok";
+			StringBuffer dbErrorStackTrace = new StringBuffer();
+			
+			//bind attributes is any
+			SvxhDao dao = new SvxhDao();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
+            binder.bind(request);
+            
+            //Start processing now
+			if(userName!=null && !"".equals(userName)){
+				int dmlRetval = 0;
+				logger.warn("mrn:" + dao.getThtrnr() + "  thavd:" + dao.getThavd() + "  thtdn:" + dao.getThtdn() + "  thtrdt:" + dao.getThtrdt() + "  thtuid:" + dao.getThtuid());
+				if(StringUtils.isNotEmpty(dao.getThtrnr()) && StringUtils.isNotEmpty(dao.getThavd()) && StringUtils.isNotEmpty(dao.getThtdn())
+						&& StringUtils.isNotEmpty(dao.getThtrdt()) && StringUtils.isNotEmpty(dao.getThtuid()) ){
+					logger.warn("Before UPDATE MRN adn MRN date ...");
+					dmlRetval = this.svxhDaoServices.updateMrn028(dao, dbErrorStackTrace);
+						
+				}else{
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid (rulerLord)?  Try to check: <DaoServices>.updateMrn028";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}
+				
+				//----------------------------------
+				//check returns from dml operations
+				//----------------------------------
+				if(dmlRetval<0){
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid?  Try to check: <DaoServices>.insert/update/delete";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}else{
+					//OK UPDATE
+					sb.append(jsonWriter.setJsonSimpleValidResult(userName, status));
+				}
+				
+			}else{
+				//write JSON error output
+				errMsg = "ERROR on UPDATE";
+				status = "error";
+				dbErrorStackTrace.append("request input parameters are invalid: <user>, <other mandatory fields>");
+				sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+			}
+			
+		}catch(Exception e){
+			//write std.output error output
+			Writer writer = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(writer);
+			e.printStackTrace(printWriter);
+			return "ERROR [JsonResponseOutputterController]" + writer.toString();
+		}
+		session.invalidate();
+		return sb.toString();
+	}
+	
+	/**
+	 * Method used for NCTS 5 - IE029 response (Release for transit after sänding IE015 and receiving 028 (NCTS export)
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="syjsSVXH_U_MRN_029.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String syjsSVXH_U_MRN_029( HttpSession session, HttpServletRequest request) {
+		JsonResponseWriter jsonWriter = new JsonResponseWriter();
+		StringBuffer sb = new StringBuffer();
+		
+		try{
+			logger.warn("Inside syjsSVXH_U_MRN_029");
+			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
+			String user = request.getParameter("user");
+			//Check ALWAYS user in BRIDF
+            String userName = this.bridfDaoServices.findNameById(user);
+            //DEBUG --> logger.info("USERNAME:" + userName + "XX");
+            String errMsg = "";
+			String status = "ok";
+			StringBuffer dbErrorStackTrace = new StringBuffer();
+			
+			//bind attributes is any
+			SvxhDao dao = new SvxhDao();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
+            binder.bind(request);
+            
+            //Start processing now
+			if(userName!=null && !"".equals(userName)){
+				int dmlRetval = 0;
+				logger.warn("mrn:" + dao.getThtrnr() + "  thavd:" + dao.getThavd() + "  thtdn:" + dao.getThtdn() + "  thtuid:" + dao.getThtuid());
+				if(StringUtils.isNotEmpty(dao.getThtrnr()) && StringUtils.isNotEmpty(dao.getThavd()) && StringUtils.isNotEmpty(dao.getThtdn()) 
+						&& StringUtils.isNotEmpty(dao.getThtuid()) ){
+					logger.warn("Before UPDATE for 029 ...");
+					dmlRetval = this.svxhDaoServices.updateMrn029(dao, dbErrorStackTrace);
+						
+				}else{
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid (rulerLord)?  Try to check: <DaoServices>.updateMrn028";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}
+				
+				//----------------------------------
+				//check returns from dml operations
+				//----------------------------------
+				if(dmlRetval<0){
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid?  Try to check: <DaoServices>.insert/update/delete";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}else{
+					//OK UPDATE
+					sb.append(jsonWriter.setJsonSimpleValidResult(userName, status));
+				}
+				
+			}else{
+				//write JSON error output
+				errMsg = "ERROR on UPDATE";
+				status = "error";
+				dbErrorStackTrace.append("request input parameters are invalid: <user>, <other mandatory fields>");
+				sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+			}
+			
+		}catch(Exception e){
+			//write std.output error output
+			Writer writer = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(writer);
+			e.printStackTrace(printWriter);
+			return "ERROR [JsonResponseOutputterController]" + writer.toString();
+		}
+		session.invalidate();
+		return sb.toString();
+	}
+	
+	@RequestMapping(value="syjsSVXH_U_MRN_045.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String syjsSVXH_U_MRN_045( HttpSession session, HttpServletRequest request) {
+		JsonResponseWriter jsonWriter = new JsonResponseWriter();
+		StringBuffer sb = new StringBuffer();
+		
+		try{
+			logger.warn("Inside syjsSVXH_U_MRN_045");
+			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
+			String user = request.getParameter("user");
+			//Check ALWAYS user in BRIDF
+            String userName = this.bridfDaoServices.findNameById(user);
+            //DEBUG --> logger.info("USERNAME:" + userName + "XX");
+            String errMsg = "";
+			String status = "ok";
+			StringBuffer dbErrorStackTrace = new StringBuffer();
+			
+			//bind attributes is any
+			SvxhDao dao = new SvxhDao();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
+            binder.bind(request);
+            
+            //Start processing now
+			if(userName!=null && !"".equals(userName)){
+				int dmlRetval = 0;
+				logger.warn("mrn:" + dao.getThtrnr() + "  thavd:" + dao.getThavd() + "  thtdn:" + dao.getThtdn() + "  thtuid:" + dao.getThtuid());
+				if(StringUtils.isNotEmpty(dao.getThtrnr()) && StringUtils.isNotEmpty(dao.getThavd()) && StringUtils.isNotEmpty(dao.getThtdn())
+						&& StringUtils.isNotEmpty(dao.getThtuid()) ){
+					logger.warn("Before UPDATE status for 045 Write-off date ...");
+					dmlRetval = this.svxhDaoServices.updateMrn045(dao, dbErrorStackTrace);
+						
+				}else{
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid (rulerLord)?  Try to check: <DaoServices>.updateMrn028";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}
+				
+				//----------------------------------
+				//check returns from dml operations
+				//----------------------------------
+				if(dmlRetval<0){
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid?  Try to check: <DaoServices>.insert/update/delete";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}else{
+					//OK UPDATE
+					sb.append(jsonWriter.setJsonSimpleValidResult(userName, status));
+				}
+				
+			}else{
+				//write JSON error output
+				errMsg = "ERROR on UPDATE";
+				status = "error";
+				dbErrorStackTrace.append("request input parameters are invalid: <user>, <other mandatory fields>");
+				sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+			}
+			
+		}catch(Exception e){
+			//write std.output error output
+			Writer writer = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(writer);
+			e.printStackTrace(printWriter);
+			return "ERROR [JsonResponseOutputterController]" + writer.toString();
+		}
+		session.invalidate();
+		return sb.toString();
+	}
+	
+	
+	/**
+	 * Method used for NCTS 5 - IE028 response (MRN Allocated after sänding IE015 (NCTS export)
+	 * FRISOK db table must have a corresponding record
+	 * OBSOLETE since SE - NCTS Export does not save this references in FRISOK
+	 * 
+	 * 
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="syjsSVXH_U_FRISOK_028.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String syjsSVXH_U_FRISOK_028( HttpSession session, HttpServletRequest request) {
+		JsonResponseWriter jsonWriter = new JsonResponseWriter();
+		StringBuffer sb = new StringBuffer();
+		
+		try{
+			logger.warn("Inside syjsSVXH_U_FRISOK_028");
+			//TEST-->logger.info("Servlet root:" + AppConstants.VERSION_SYJSERVICES);
+			String user = request.getParameter("user");
+			//Check ALWAYS user in BRIDF
+            String userName = this.bridfDaoServices.findNameById(user);
+            //DEBUG --> logger.info("USERNAME:" + userName + "XX");
+            String errMsg = "";
+			String status = "ok";
+			StringBuffer dbErrorStackTrace = new StringBuffer();
+			
+			//bind attributes is any
+			SvxhDao dao = new SvxhDao();
+			ServletRequestDataBinder binder = new ServletRequestDataBinder(dao);
+            binder.bind(request);
+            
+            //Start processing now
+			if(userName!=null && !"".equals(userName)){
+				int dmlRetval = 0;
+				logger.warn("mrn:" + dao.getThtrnr() + "  thavd:" + dao.getThavd() + "  thtdn:" + dao.getThtdn() + "  thtrdt:" + dao.getThtrdt() + "  thtuid:" + dao.getThtuid());
+				if(StringUtils.isNotEmpty(dao.getThtrnr()) && StringUtils.isNotEmpty(dao.getThavd()) && StringUtils.isNotEmpty(dao.getThtdn())
+						&& StringUtils.isNotEmpty(dao.getThtrdt()) && StringUtils.isNotEmpty(dao.getThtuid()) ){
+					logger.warn("Before UPDATE MRN adn MRN date ...");
+					dmlRetval = this.svxhDaoServices.updateMrn028(dao, dbErrorStackTrace);
+						
+				}else{
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid (rulerLord)?  Try to check: <DaoServices>.updateMrn028";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}
+				
+				//----------------------------------
+				//check returns from dml operations
+				//----------------------------------
+				if(dmlRetval<0){
+					//write JSON error output
+					errMsg = "ERROR on UPDATE: invalid?  Try to check: <DaoServices>.insert/update/delete";
+					status = "error";
+					sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+				}else{
+					//OK UPDATE
+					sb.append(jsonWriter.setJsonSimpleValidResult(userName, status));
+				}
+				
+			}else{
+				//write JSON error output
+				errMsg = "ERROR on UPDATE";
+				status = "error";
+				dbErrorStackTrace.append("request input parameters are invalid: <user>, <other mandatory fields>");
+				sb.append(jsonWriter.setJsonSimpleErrorResult(userName, errMsg, status, dbErrorStackTrace));
+			}
+			
+		}catch(Exception e){
+			//write std.output error output
+			Writer writer = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(writer);
+			e.printStackTrace(printWriter);
+			return "ERROR [JsonResponseOutputterController]" + writer.toString();
+		}
+		session.invalidate();
+		return sb.toString();
+	}
+	
 	
 	//----------------
 	//WIRED SERVICES
