@@ -191,6 +191,38 @@ public class SvxhDaoServicesImpl implements SvxhDaoServices {
 		
 		return retval;
 	}
+	public int updateStatus(Object daoObj, StringBuffer errorStackTrace){
+		int retval = 0;
+		
+		try{
+			SvxhDao dao = (SvxhDao)daoObj;
+			StringBuffer sql = new StringBuffer();
+			sql.append(" UPDATE svxh SET thst = ?  ");
+			//id's
+			sql.append(" WHERE thavd = ? ");
+			sql.append(" AND thtdn = ? ");
+			sql.append(" AND thtuid = ? ");
+			
+			//params
+			retval = this.jdbcTemplate.update( sql.toString(), new Object[] { 
+					    dao.getThst(), 
+						//id's
+						dao.getThavd(),
+						dao.getThtdn(),
+						dao.getThtuid()
+						} );
+			
+		}catch(Exception e){
+			Writer writer = this.dbErrorMessageMgr.getPrintWriter(e);
+			logger.error(writer.toString());
+			//Chop the message to comply to JSON-validation
+			errorStackTrace.append(this.dbErrorMessageMgr.getJsonValidDbException(writer));
+			retval = -1;
+		}
+		
+		return retval;
+	}
+	
 	/**
 	 * Update MRN for 028
 	 * NCTS 5 - Feb.2023

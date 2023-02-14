@@ -14,6 +14,7 @@ public interface SvxhDaoServices extends IDaoServices {
 	public List getListReservedGuaranteeWithId ( String id, StringBuffer errorStackTrace );
 	public List findById (Object obj, StringBuffer errorStackTrace );
 	public int releaseGuarantee (Object obj, StringBuffer errorStackTrace );
+	public int updateStatus(Object daoObj, StringBuffer errorStackTrace);
 	public int updateMrn028(Object daoObj, StringBuffer errorStackTrace);
 	public int updateMrn029(Object daoObj, StringBuffer errorStackTrace);
 	public int updateMrn045(Object daoObj, StringBuffer errorStackTrace);
