@@ -51,6 +51,11 @@
   </bean>
   
   
+  <bean id="svnhDaoServices" class="no.systema.jservices.tds.z.maintenance.tdsncts.model.dao.services.SvnhDaoServicesImpl">
+      <property name="jdbcTemplate"><ref bean="jdbcTemplate"/></property>
+  </bean>
+  
+  
   
   
   <!--///////////////////
